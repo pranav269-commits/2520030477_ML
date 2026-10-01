@@ -1,0 +1,19 @@
+SPAM EMAIL CLASSIFICATION USING NAIVE BAYES AND SVM
+===================================================
+
+Dataset notation:
+X = v2  -> message text / input feature
+Y = v1  -> ham-spam target variable
+
+WINDOWS QUICK START
+1. Extract this ZIP into a NEW folder.
+2. Close older CMD windows running previous copies of this project.
+3. Double-click setup_and_run.bat.
+4. The launcher creates a local .venv and installs the project packages.
+5. Preflight validates the dataset and models and retrains stale artifacts automatically.
+6. Keep the CMD window open.
+7. Use the browser page that opens automatically.
+
+The project includes a clean local dataset and does not need to download spam.csv.
+The SVM uses predict() + decision_function(), not fragile SVC probability internals.
+If port 5000 is occupied, the app automatically opens on the next free port.

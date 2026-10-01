@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Spam Email Classification using Naive Bayes and SVM — interactive ML experiment, kernel comparison and hyperparameter laboratory.">
+  <title>Spam Email Classification | NB × SVM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="page-grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Spam Intelligence Laboratory home">
+      <span class="wordmark-mark">NB×SVM</span>
+      <span class="wordmark-copy">Spam Intelligence Laboratory</span>
+    </a>
+    <nav class="nav" aria-label="Project sections">
+      <a href="#analyzer">Analyze</a>
+      <a href="#performance">Compare</a>
+      <a href="#kernel-lab">Kernel Lab</a>
+      <a href="#hyperparameter-lab">Optimize</a>
+    </nav>
+    <div class="status-pill" id="systemStatus"><span class="status-dot"></span><span>Checking model</span></div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell reveal">
+      <div class="hero-copy">
+        <p class="eyebrow">Machine Learning · Text Classification · Explainable Experiment</p>
+        <h1>Spam Email Classification <em>Using Naive Bayes and SVM</em></h1>
+        <p class="hero-lead">A complete dual-model investigation that goes beyond a binary verdict—comparing classifiers, exposing evidence, testing the SVM kernel trick and discovering the strongest hyperparameter configuration through cross-validation.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#analyzer">Analyze an email <span>↘</span></a>
+          <a class="button text-button" href="#kernel-lab">Explore the SVM laboratory</a>
+        </div>
+        <div class="hero-facts" aria-label="Experiment facts">
+          <div><span id="heroRows">5,572</span><small>raw messages</small></div>
+          <div><span>2</span><small>core classifiers</small></div>
+          <div><span>4</span><small>SVM kernels</small></div>
+          <div><span>F1</span><small>selection priority</small></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Abstract machine learning visualization">
+        <div class="orbit orbit-a"></div>
+        <div class="orbit orbit-b"></div>
+        <div class="orbit orbit-c"></div>
+        <div class="model-core">
+          <span class="core-kicker">DUAL MODEL</span>
+          <strong>NB</strong><i>×</i><strong>SVM</strong>
+          <small>TF–IDF FEATURE SPACE</small>
+        </div>
+        <span class="node node-1">C</span><span class="node node-2">γ</span><span class="node node-3">F1</span>
+        <span class="node node-4">RBF</span><span class="node node-5">POLY</span><span class="node node-6">LINEAR</span>
+      </div>
+    </section>
+
+    <section class="marquee" aria-hidden="true">
+      <div>NAIVE BAYES · SUPPORT VECTOR MACHINE · TF-IDF · PRECISION · RECALL · F1 SCORE · KERNEL TRICK · HYPERPARAMETERS · CROSS-VALIDATION · </div>
+    </section>
+
+    <section class="section shell" id="analyzer">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">01 · Live inference</p>
+          <h2>Put any message under the microscope.</h2>
+        </div>
+        <p>Paste a message that was never in the training dataset. Both models process the same TF-IDF representation and return independent classifications.</p>
+      </div>
+
+      <div class="analyzer-layout reveal">
+        <div class="composer panel">
+          <div class="panel-topline">
+            <span>MESSAGE INPUT</span>
+            <span id="charCount">0 / 15,000</span>
+          </div>
+          <textarea id="emailInput" maxlength="15000" spellcheck="false" placeholder="Paste an email or message here…"></textarea>
+          <div class="example-row">
+            <span>TRY A SAMPLE</span>
+            <button class="chip sample-btn" data-sample="spam">Spam-like</button>
+            <button class="chip sample-btn" data-sample="ham">Ham-like</button>
+            <button class="chip" id="clearBtn">Clear</button>
+          </div>
+          <button class="analyze-button" id="analyzeBtn">
+            <span class="button-label">Run dual-model analysis</span>
+            <span class="button-arrow">→</span>
+          </button>
+          <p class="form-note" id="analyzeNote">The first run may train and cache the ML experiment if artifacts are not present yet.</p>
+        </div>
+
+        <aside class="analysis-primer panel">
+          <p class="eyebrow">WHAT HAPPENS NEXT</p>
+          <ol class="process-list">
+            <li><span>01</span><div><strong>Vectorize</strong><small>TF-IDF transforms language into a sparse numerical feature space.</small></div></li>
+            <li><span>02</span><div><strong>Classify twice</strong><small>Multinomial Naive Bayes and optimized SVM inspect the same message independently.</small></div></li>
+            <li><span>03</span><div><strong>Expose evidence</strong><small>Influential vocabulary and decision strength explain the verdict instead of hiding behind a percentage.</small></div></li>
+          </ol>
+          <div class="micro-card dataset-variables">
+            <span>DATASET VARIABLES</span>
+            <p><strong>X = v2</strong> · message text / input feature</p>
+            <p><strong>Y = v1</strong> · ham-spam target variable</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section shell result-section" id="results" aria-live="polite">
+      <div class="result-empty panel" id="resultEmpty">
+        <span class="empty-index">RESULT / 00</span>
+        <h3>Your forensic report appears here.</h3>
+        <p>Submit a message above to compare both classifiers, inspect Naive Bayes confidence, view the SVM decision margin and uncover the vocabulary influencing the decision.</p>
+      </div>
+
+      <div class="result-content" id="resultContent" hidden>
+        <div class="verdict-strip panel reveal-static">
+          <div>
+            <p class="eyebrow">FINAL SYSTEM VERDICT</p>
+            <h2 id="finalVerdict">—</h2>
+          </div>
+          <div class="agreement-seal">
+            <span id="agreementLabel">—</span>
+            <strong id="agreementCode">—</strong>
+            <small>model agreement</small>
+          </div>
+        </div>
+
+        <div class="model-duel">
+          <article class="model-card panel" id="nbCard">
+            <div class="model-card-head"><span>MODEL A</span><strong>Naive Bayes</strong></div>
+            <div class="model-verdict"><span id="nbPrediction">—</span><strong id="nbConfidence">—</strong></div>
+            <div class="prob-track"><i id="nbTrack"></i></div>
+            <dl>
+              <div><dt>Spam probability</dt><dd id="nbSpam">—</dd></div>
+              <div><dt>Ham probability</dt><dd id="nbHam">—</dd></div>
+              <div><dt>Mechanism</dt><dd>Probabilistic word evidence</dd></div>
+            </dl>
+          </article>
+
+          <div class="versus-mark"><span>VS</span></div>
+
+          <article class="model-card panel" id="svmCard">
+            <div class="model-card-head"><span>MODEL B</span><strong>Optimized SVM</strong></div>
+            <div class="model-verdict"><span id="svmPrediction">—</span><strong id="svmStrength">—</strong></div>
+            <div class="prob-track"><i id="svmTrack"></i></div>
+            <dl>
+              <div><dt>Decision strength</dt><dd id="svmStrengthDetail">—</dd></div>
+              <div><dt>Decision margin</dt><dd id="svmMargin">—</dd></div>
+              <div><dt>Kernel</dt><dd id="svmKernel">—</dd></div>
+              <div><dt>Hyperparameters</dt><dd id="svmParams">—</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <div class="forensic-grid">
+          <article class="panel evidence-panel">
+            <div class="panel-title"><div><p class="eyebrow">WORD X-RAY</p><h3>Influential vocabulary</h3></div><span>NB log-odds × TF-IDF</span></div>
+            <div id="evidenceList" class="evidence-list"></div>
+          </article>
+          <article class="panel profile-panel">
+            <div class="panel-title"><div><p class="eyebrow">MESSAGE DNA</p><h3>Language profile</h3></div><span id="messageStats">—</span></div>
+            <div id="profileBars" class="profile-bars"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="performance">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">02 · Model performance arena</p><h2>Which classifier actually performs better?</h2></div>
+          <p>Both models are evaluated on the same held-out test set. Because spam data is imbalanced, F1, Precision and Recall sit beside Accuracy rather than underneath it.</p>
+        </div>
+
+        <div class="variable-map reveal" aria-label="Dataset variable mapping">
+          <div><span>X</span><strong>X = v2</strong><small>Message text · input feature</small></div>
+          <div><span>Y</span><strong>Y = v1</strong><small>Ham / Spam · target variable</small></div>
+        </div>
+
+        <div class="stats-ribbon reveal" id="datasetStats">
+          <div><small>CLEAN ROWS</small><strong>—</strong></div>
+          <div><small>HAM</small><strong>—</strong></div>
+          <div><small>SPAM</small><strong>—</strong></div>
+          <div><small>TF-IDF FEATURES</small><strong>—</strong></div>
+          <div><small>TEST ROWS</small><strong>—</strong></div>
+        </div>
+
+        <div class="performance-grid reveal">
+          <div class="panel metric-table-wrap">
+            <div class="panel-title"><div><p class="eyebrow">TEST-SET METRICS</p><h3>Naive Bayes vs SVM</h3></div><span id="baselineWinner">—</span></div>
+            <div class="table-scroll">
+              <table class="data-table" id="modelMetricTable">
+                <thead><tr><th>Metric</th><th>Naive Bayes</th><th>Baseline SVM</th><th>Optimized SVM</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel metric-bars-wrap">
+            <div class="panel-title"><div><p class="eyebrow">COMPARATIVE SIGNAL</p><h3>Metric profile</h3></div><span>higher is better</span></div>
+            <div id="metricBars" class="metric-bars"></div>
+          </div>
+        </div>
+
+        <div class="confusion-wrap" id="confusion">
+          <div class="section-subheading"><p class="eyebrow">CONFUSION MATRICES</p><h3>See the mistakes, not just the score.</h3></div>
+          <div class="confusion-grid reveal">
+            <article class="panel"><div class="matrix-title"><strong>Naive Bayes</strong><span>held-out test set</span></div><div class="matrix" id="nbMatrix"></div></article>
+            <article class="panel"><div class="matrix-title"><strong>Optimized SVM</strong><span>held-out test set</span></div><div class="matrix" id="svmMatrix"></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="kernel-lab">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow">03 · SVM Kernel Laboratory</p><h2>One algorithm. Four ways to shape the boundary.</h2></div>
+        <p>The kernel trick lets SVM evaluate nonlinear relationships through similarity functions without explicitly constructing every high-dimensional coordinate.</p>
+      </div>
+
+      <div class="kernel-stage reveal">
+        <div class="kernel-viz panel" id="kernelViz">
+          <div class="panel-title"><div><p class="eyebrow">KERNEL TRICK · CONCEPT VIEW</p><h3>From tangled classes to a separable space</h3></div><button class="chip" id="kernelVizToggle">Transform space</button></div>
+          <svg viewBox="0 0 720 330" role="img" aria-label="Educational SVM kernel transformation visualization">
+            <path class="viz-axis" d="M55 276H665 M90 300V30" />
+            <path class="viz-boundary" d="M365 44V286" />
+            <g class="class-a">
+              <circle cx="190" cy="120" r="10"/><circle cx="240" cy="204" r="10"/><circle cx="318" cy="138" r="10"/><circle cx="286" cy="238" r="10"/><circle cx="225" cy="82" r="10"/>
+            </g>
+            <g class="class-b">
+              <circle cx="255" cy="145" r="10"/><circle cx="335" cy="210" r="10"/><circle cx="382" cy="125" r="10"/><circle cx="428" cy="222" r="10"/><circle cx="332" cy="82" r="10"/>
+            </g>
+            <text x="95" y="55">feature space</text><text x="520" y="300">decision geometry</text>
+          </svg>
+          <div class="viz-caption"><span id="kernelVizState">Original feature space</span><p id="kernelVizCopy">Class patterns can overlap in their original representation, making a straight separator difficult.</p></div>
+        </div>
+
+        <div class="kernel-results" id="kernelCards"></div>
+      </div>
+
+      <div class="kernel-table panel reveal">
+        <div class="panel-title"><div><p class="eyebrow">CONTROLLED COMPARISON</p><h3>Kernel performance at the same baseline settings</h3></div><span>C = 1 · gamma = scale</span></div>
+        <div class="table-scroll">
+          <table class="data-table" id="kernelTable">
+            <thead><tr><th>Kernel</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="hyperparameter-lab">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">04 · Hyperparameter Intelligence</p><h2>Search the SVM configuration space.</h2></div>
+          <p>Every row below is an actual cross-validated SVM configuration. The system ranks them by F1 first, then uses Recall, Precision and Accuracy as tie-breakers.</p>
+        </div>
+
+        <div class="best-config panel reveal" id="bestConfig">
+          <div class="best-rank">#01</div>
+          <div><p class="eyebrow">OPTIMAL CONFIGURATION</p><h3 id="bestKernel">—</h3><p id="bestParamsLine">—</p></div>
+          <div class="best-score"><span>CV F1</span><strong id="bestF1">—</strong><small>selection metric</small></div>
+          <div class="best-score"><span>CV ACCURACY</span><strong id="bestAccuracy">—</strong><small>cross-validated</small></div>
+        </div>
+
+        <div class="hyper-controls reveal">
+          <div><label for="kernelFilter">Filter kernel</label><select id="kernelFilter"><option value="all">All kernels</option><option value="linear">Linear</option><option value="rbf">RBF</option><option value="poly">Polynomial</option><option value="sigmoid">Sigmoid</option></select></div>
+          <p><strong>C</strong> balances margin width vs training errors · <strong>γ</strong> controls influence radius · <strong>degree</strong> controls polynomial complexity.</p>
+        </div>
+
+        <div class="panel hyper-table reveal">
+          <div class="table-scroll">
+            <table class="data-table" id="hyperTable">
+              <thead><tr><th>Rank</th><th>Kernel</th><th>C</th><th>Gamma</th><th>Degree</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>Specificity</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="methodology">
+      <div class="section-heading reveal">
+        <div><p class="eyebrow">05 · Reproducible methodology</p><h2>The complete experiment, from raw text to optimized classifier.</h2></div>
+        <p>The interface is the presentation layer; every displayed metric is produced by the Python ML pipeline and cached as project artifacts.</p>
+      </div>
+      <div class="method-grid reveal">
+        <article><span>01</span><h3>Clean</h3><p>Retain X = v2 as message input and Y = v1 as the ham/spam target, then remove invalid and duplicate records.</p></article>
+        <article><span>02</span><h3>Vectorize</h3><p>TF-IDF with unigram + bigram features turns language into sparse vectors.</p></article>
+        <article><span>03</span><h3>Compare</h3><p>Naive Bayes and baseline SVM receive the same train/test split and metrics.</p></article>
+        <article><span>04</span><h3>Kernel test</h3><p>Linear, RBF, polynomial and sigmoid kernels are evaluated under shared settings.</p></article>
+        <article><span>05</span><h3>Tune</h3><p>Cross-validation explores C, gamma and degree combinations and ranks by F1.</p></article>
+        <article><span>06</span><h3>Deploy</h3><p>The optimized SVM and Naive Bayes models power live analysis through Flask.</p></article>
+      </div>
+      <div class="repro-note panel reveal"><span>REPRODUCIBILITY</span><p>X = v2 message text · Y = v1 ham/spam target · 80/20 stratified split · random_state = 42 · primary tuning metric: F1-score.</p></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div><strong>Spam Email Classification Using Naive Bayes and SVM</strong><span>Machine Learning Project · Experimental Web Interface</span></div>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

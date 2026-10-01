@@ -1,0 +1,319 @@
+{
+  "artifact_schema": 2,
+  "runtime": {
+    "python": "3.13",
+    "scikit_learn": "1.8.0",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "joblib": "1.5.3"
+  },
+  "generated_at": "2026-09-11T06:54:54.936687+00:00",
+  "dataset": {
+    "raw_rows": 5572,
+    "clean_rows": 5169,
+    "duplicates_removed": 403,
+    "ham": 4516,
+    "spam": 653,
+    "train_rows": 4135,
+    "test_rows": 1034,
+    "features": 8000,
+    "variables": {
+      "X": "v2 (message text)",
+      "Y": "v1 (ham/spam target)"
+    }
+  },
+  "experiment": {
+    "split": "80/20 stratified",
+    "random_state": 42,
+    "feature_extraction": "TF-IDF (1-2 grams)",
+    "selection_metric": "Cross-validated F1-score",
+    "baseline_winner": "SVM"
+  },
+  "model_metrics": {
+    "naive_bayes": {
+      "accuracy": 0.974855,
+      "precision": 0.990654,
+      "recall": 0.80916,
+      "f1": 0.890756,
+      "specificity": 0.998893,
+      "roc_auc": 0.989213,
+      "fpr": 0.001107,
+      "fnr": 0.19084,
+      "confusion_matrix": [
+        [
+          902,
+          1
+        ],
+        [
+          25,
+          106
+        ]
+      ]
+    },
+    "svm_baseline": {
+      "accuracy": 0.981625,
+      "precision": 0.982759,
+      "recall": 0.870229,
+      "f1": 0.923077,
+      "specificity": 0.997785,
+      "roc_auc": 0.994505,
+      "fpr": 0.002215,
+      "fnr": 0.129771,
+      "confusion_matrix": [
+        [
+          901,
+          2
+        ],
+        [
+          17,
+          114
+        ]
+      ]
+    },
+    "svm_optimized": {
+      "accuracy": 0.980658,
+      "precision": 0.974359,
+      "recall": 0.870229,
+      "f1": 0.919355,
+      "specificity": 0.996678,
+      "roc_auc": 0.994315,
+      "fpr": 0.003322,
+      "fnr": 0.129771,
+      "confusion_matrix": [
+        [
+          900,
+          3
+        ],
+        [
+          17,
+          114
+        ]
+      ]
+    }
+  },
+  "kernel_results": [
+    {
+      "kernel": "linear",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.981625,
+      "precision": 0.982759,
+      "recall": 0.870229,
+      "f1": 0.923077,
+      "specificity": 0.997785,
+      "roc_auc": 0.994505,
+      "fpr": 0.002215,
+      "fnr": 0.129771,
+      "confusion_matrix": [
+        [
+          901,
+          2
+        ],
+        [
+          17,
+          114
+        ]
+      ]
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.976789,
+      "precision": 1.0,
+      "recall": 0.816794,
+      "f1": 0.89916,
+      "specificity": 1.0,
+      "roc_auc": 0.996145,
+      "fpr": 0.0,
+      "fnr": 0.183206,
+      "confusion_matrix": [
+        [
+          903,
+          0
+        ],
+        [
+          24,
+          107
+        ]
+      ]
+    },
+    {
+      "kernel": "poly",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": 3,
+      "accuracy": 0.924565,
+      "precision": 1.0,
+      "recall": 0.40458,
+      "f1": 0.576087,
+      "specificity": 1.0,
+      "roc_auc": 0.996187,
+      "fpr": 0.0,
+      "fnr": 0.59542,
+      "confusion_matrix": [
+        [
+          903,
+          0
+        ],
+        [
+          78,
+          53
+        ]
+      ]
+    },
+    {
+      "kernel": "sigmoid",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.978723,
+      "precision": 0.965812,
+      "recall": 0.862595,
+      "f1": 0.91129,
+      "specificity": 0.99557,
+      "roc_auc": 0.993973,
+      "fpr": 0.00443,
+      "fnr": 0.137405,
+      "confusion_matrix": [
+        [
+          899,
+          4
+        ],
+        [
+          18,
+          113
+        ]
+      ]
+    }
+  ],
+  "hyperparameter_results": [
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": 0.1,
+      "degree": null,
+      "accuracy": 0.974123,
+      "precision": 0.977167,
+      "recall": 0.814177,
+      "f1": 0.888227,
+      "specificity": 0.997232,
+      "rank": 1
+    },
+    {
+      "kernel": "linear",
+      "C": 10.0,
+      "gamma": null,
+      "degree": null,
+      "accuracy": 0.972671,
+      "precision": 0.965801,
+      "recall": 0.812261,
+      "f1": 0.882373,
+      "specificity": 0.995848,
+      "rank": 2
+    },
+    {
+      "kernel": "linear",
+      "C": 1.0,
+      "gamma": null,
+      "degree": null,
+      "accuracy": 0.972671,
+      "precision": 0.98333,
+      "recall": 0.796935,
+      "f1": 0.880315,
+      "specificity": 0.998062,
+      "rank": 3
+    },
+    {
+      "kernel": "sigmoid",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.97243,
+      "precision": 0.974193,
+      "recall": 0.802682,
+      "f1": 0.880084,
+      "specificity": 0.996955,
+      "rank": 4
+    },
+    {
+      "kernel": "sigmoid",
+      "C": 10.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.968078,
+      "precision": 0.922009,
+      "recall": 0.816092,
+      "f1": 0.865787,
+      "specificity": 0.990036,
+      "rank": 5
+    },
+    {
+      "kernel": "rbf",
+      "C": 10.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.956952,
+      "precision": 0.988637,
+      "recall": 0.666667,
+      "f1": 0.796339,
+      "specificity": 0.998893,
+      "rank": 6
+    },
+    {
+      "kernel": "rbf",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": null,
+      "accuracy": 0.949698,
+      "precision": 0.993789,
+      "recall": 0.605364,
+      "f1": 0.752375,
+      "specificity": 0.999447,
+      "rank": 7
+    },
+    {
+      "kernel": "poly",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": 2,
+      "accuracy": 0.920435,
+      "precision": 0.994846,
+      "recall": 0.371648,
+      "f1": 0.541137,
+      "specificity": 0.999723,
+      "rank": 8
+    },
+    {
+      "kernel": "poly",
+      "C": 1.0,
+      "gamma": "scale",
+      "degree": 3,
+      "accuracy": 0.906409,
+      "precision": 0.992857,
+      "recall": 0.260537,
+      "f1": 0.412728,
+      "specificity": 0.999723,
+      "rank": 9
+    },
+    {
+      "kernel": "linear",
+      "C": 0.1,
+      "gamma": null,
+      "degree": null,
+      "accuracy": 0.87376,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "specificity": 1.0,
+      "rank": 10
+    }
+  ],
+  "best_params": {
+    "kernel": "rbf",
+    "C": 10.0,
+    "gamma": 0.1
+  }
+}

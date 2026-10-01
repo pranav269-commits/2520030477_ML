@@ -1,0 +1,18 @@
+STABLE VERIFIED BUILD
+=====================
+Project: Spam Email Classification Using Naive Bayes and SVM
+Dataset input: X = v2 (message text)
+Target variable: Y = v1 (ham/spam)
+Raw rows: 5572
+Clean rows: 5169
+Ham: 4516
+Spam: 653
+TF-IDF features: 8000
+SVM kernels: Linear, RBF, Polynomial, Sigmoid
+Hyperparameter configurations: 10
+Cross-validation folds: 2 stratified folds
+SVM live inference: predict() + decision_function(); probability=False
+Artifact schema: 2 with runtime compatibility signature
+Dataset recovery: local spam_canonical.csv
+Startup: isolated .venv + preflight validation + automatic stale-model retraining
+Local server: ports 5000-5019
